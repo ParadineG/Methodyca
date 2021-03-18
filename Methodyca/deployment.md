@@ -23,7 +23,7 @@ nvm install 14 --latest-npm
 ## main install and update
 ### copy project
 php artisan down
-copy both folders
+download https://github.com/ParadineG/Methodyca and upload to web
 overwrite .env file
 
 ### setup server
