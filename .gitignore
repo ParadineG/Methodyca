@@ -1,0 +1,16 @@
+/node_modules
+/htdocs/methodyca/hot
+/htdocs/methodyca/storage
+/htdocs/methodyca/js
+/htdocs/methodyca/css
+/htdocs/methodyca/fonts
+/storage/*.key
+/vendor
+.env
+.env.backup
+.phpunit.result.cache
+docker-compose.override.yml
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
