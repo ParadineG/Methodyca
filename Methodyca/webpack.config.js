@@ -5,7 +5,7 @@ module.exports = {
     resolve: {
         alias: {
             '@': path.resolve('resources/js'),
-            'fonts': path.resolve('resources/fonts'),
+            '/methodyca/fonts': path.resolve('resources/fonts'),
         },
     },
     plugins: [

@@ -33,7 +33,7 @@
         },
         methods: {
             getTopics() {
-                axios.get('/api/topics')
+                axios.get('../api/topics')
                 .then((res)  => {
                     this.topics = res.data;
                     console.log(this.topics);

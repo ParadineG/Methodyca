@@ -87,7 +87,7 @@
         },
         methods: {
             async addTopic() {
-                const res = await axios.post('/api/topics', this.topic)
+                const res = await axios.post('../api/topics', this.topic)
                 console.log(res.response);
             }
         }

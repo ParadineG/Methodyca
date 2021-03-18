@@ -1,22 +1,24 @@
 <template>
-    <div class="bgImg">
-        <img :src="`${ imgPath }SkyW2.png`" id="bg">
-        <img :src="`${ imgPath }MoonBig.png`" id="moon">
-        <img :src="`${ imgPath }PlanetBig.png`" id="planet">
-        <img :src="`${ imgPath }MountainsW2.png`" id="mountain">
-        <img :src="`${ imgPath }CloudWBig.png`" id="cloud">
-        <img :src="`${ imgPath }ValleyWNoSky2.png`" id="valley">
-        <img :src="`${ imgPath }ForegroundWNoText2.png`" id="fg">
-    </div>
-    <main-header :imgPath="imgPath"/>
-    <div class="pageContainer">
-        <!-- Page Content -->
-        <main >
-            <article class="contentContainer">
-                <slot v-bind="$attrs"></slot>
-            </article>
-        </main>
-        <main-footer :imgPath="imgPath"/>
+    <div>
+        <div class="bgImg">
+            <img :src="`${ imgPath }SkyW2.png`" id="bg">
+            <img :src="`${ imgPath }MoonBig.png`" id="moon">
+            <img :src="`${ imgPath }PlanetBig.png`" id="planet">
+            <img :src="`${ imgPath }MountainsW2.png`" id="mountain">
+            <img :src="`${ imgPath }CloudWBig.png`" id="cloud">
+            <img :src="`${ imgPath }ValleyWNoSky2.png`" id="valley">
+            <img :src="`${ imgPath }ForegroundWNoText2.png`" id="fg">
+        </div>
+        <main-header :imgPath="imgPath"/>
+        <div class="pageContainer">
+            <!-- Page Content -->
+            <main >
+                <article class="contentContainer">
+                    <slot></slot>
+                </article>
+            </main>
+            <main-footer :imgPath="imgPath"/>
+        </div>
     </div>
 </template>
 <style>
@@ -24,31 +26,31 @@
 @font-face {
 	font-family: "VeteranTypewriter";
 	src: local("VeteranTypewriter"),
-		url("fonts/veteran-typewriter.ttf") format("truetype");
+		url("/methodyca/fonts/veteran-typewriter.ttf") format("truetype");
 }
 
 @font-face {
 	font-family: "TypeWrong";
 	src: local("VeteranTypewriter"),
-		url("fonts/TypeWrong-Smudged-Bold.ttf") format("truetype");
+		url("/methodyca/fonts/TypeWrong-Smudged-Bold.ttf") format("truetype");
 }
 
 @font-face {
 	font-family: "GoldenDragon";
 	src: local("GoldenDragon"),
-		url("fonts/golden-dragon-solid.ttf") format("truetype");
+		url("/methodyca/fonts/golden-dragon-solid.ttf") format("truetype");
 }
 
 @font-face {
 	font-family: "Subscriber";
 	src: local("Subscriber"),
-		url("fonts/SUBSCRIBER-Regular.otf") format("opentype");
+		url("/methodyca/fonts/SUBSCRIBER-Regular.otf") format("opentype");
 }
 
 @font-face {
 	font-family: "DaisyWheel";
 	src: local("DaisyWheel"),
-		url("fonts/daisywhl.otf") format("opentype");
+		url("/methodyca/fonts/daisywhl.otf") format("opentype");
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Raleway');
