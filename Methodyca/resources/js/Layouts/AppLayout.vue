@@ -1,25 +1,25 @@
 <template>
-    <div>
-        <div class="bgImg">
-            <img :src="`${ imgPath }SkyW2.png`" id="bg">
-            <img :src="`${ imgPath }MoonBig.png`" id="moon">
-            <img :src="`${ imgPath }PlanetBig.png`" id="planet">
-            <img :src="`${ imgPath }MountainsW2.png`" id="mountain">
-            <img :src="`${ imgPath }CloudWBig.png`" id="cloud">
-            <img :src="`${ imgPath }ValleyWNoSky2.png`" id="valley">
-            <img :src="`${ imgPath }ForegroundWNoText2.png`" id="fg">
-        </div>
-        <main-header :imgPath="imgPath"/>
-        <div class="pageContainer">
-            <!-- Page Content -->
-            <main >
-                <article class="contentContainer">
-                    <slot></slot>
-                </article>
-            </main>
-            <main-footer :imgPath="imgPath"/>
-        </div>
+	<div>
+    <div class="bgImg">
+        <img :src="`${ imgPath }SkyW2.png`" id="bg">
+        <img :src="`${ imgPath }MoonBig.png`" id="moon">
+        <img :src="`${ imgPath }PlanetBig.png`" id="planet">
+        <img :src="`${ imgPath }MountainsW2.png`" id="mountain">
+        <img :src="`${ imgPath }CloudWBig.png`" id="cloud">
+        <img :src="`${ imgPath }ValleyWNoSky2.png`" id="valley">
+        <img :src="`${ imgPath }ForegroundWNoText2.png`" id="fg">
     </div>
+    <main-header :imgPath="imgPath"/>
+    <div class="pageContainer">
+        <!-- Page Content -->
+        <main >
+            <article class="contentContainer">
+                <slot></slot>
+            </article>
+        </main>
+        <main-footer :imgPath="imgPath"/>
+    </div>
+	</div>
 </template>
 <style>
 /*      - FONTS -        */

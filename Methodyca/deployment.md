@@ -30,8 +30,8 @@ overwrite .env file
 composer install --no-dev --no-interaction --no-plugins --no-scripts --no-progress --optimize-autoloader
 composer dump-autoload
 php artisan migrate --force
+php artisan route:clear
 php artisan config:cache
-php artisan route:cache
 php artisan view:cache
 npm install --production
 npm run prod
