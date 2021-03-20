@@ -107,6 +107,12 @@
           instantiate()
         })
       }
-    }
+    },
+    unmounted() {
+        if (this.gameInstance !== null){
+          this.gameInstance.Quit();
+          this.gameInstance = null;
+        }
+    },
   }
 </script>
