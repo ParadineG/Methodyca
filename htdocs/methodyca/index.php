@@ -3,6 +3,10 @@
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
+if (strpos($_SERVER['REQUEST_URI'], 'game') !== false) {   
+    header("Cross-Origin-Embedder-Policy: require-corp");
+    header("Cross-Origin-Opener-Policy: same-origin");
+}
 define('LARAVEL_START', microtime(true));
 
 /*

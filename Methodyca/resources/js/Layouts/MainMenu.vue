@@ -1,12 +1,22 @@
 <template>
 	<div class="menu">
 		<nav id="nav">
-            <inertia-link :href="route('home')">Home</inertia-link>
-            <inertia-link :href="route('game')">Game</inertia-link>
-            <inertia-link :href="route('mini-games')">Mini-Games</inertia-link>
-            <inertia-link :href="route('publication')">Publication</inertia-link>
-            <inertia-link :href="route('find-topic')">Database</inertia-link>
-            <inertia-link :href="route('about')">About Us</inertia-link>
+            <template v-if="isGame">
+                <a :href="route('home')">Home</a>
+                <inertia-link :href="route('game')">Game</inertia-link>
+                <inertia-link :href="route('mini-games')">Mini-Games</inertia-link>
+                <a :href="route('publication')">Publication</a>
+                <a :href="route('find-topic')">Database</a>
+                <a :href="route('about')">About Us</a>
+            </template>
+            <template v-else>
+                <inertia-link :href="route('home')">Home</inertia-link>
+                <a :href="route('game')">Game</a>
+                <a :href="route('mini-games')">Mini-Games</a>
+                <inertia-link :href="route('publication')">Publication</inertia-link>
+                <inertia-link :href="route('find-topic')">Database</inertia-link>
+                <inertia-link :href="route('about')">About Us</inertia-link>
+            </template>
         </nav>
 	</div>
 </template>
@@ -83,7 +93,12 @@
 
 <script>
 	export default {
-		name: "main-menu"
+		name: "main-menu",
+        computed: {
+            isGame() {
+               return window.location.pathname.includes("game")
+            }
+        },
 	}
 </script>
 
