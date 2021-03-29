@@ -2,7 +2,7 @@
     <app-layout imgPath="assets/">
         <div class="videoSizer">
             <div class="videoContainer">
-                <iframe src="https://www.youtube.com/embed/mJyjHbCvV3A" width="100%" height="100%" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe src="https://www.youtube-nocookie.com/embed/mJyjHbCvV3A?controls=0&related=0" width="100%" height="100%" title="Methodyca video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
         <text-block blockTitle="Info" blockContent1="Methodyca is a browser-based point & click adventure game whose aim is to introduce the field of research methods. Learn what happened to your thesis supervisor by diving into the fantastic realm of Methodyca and help its inhabitants through a multitude of mini-games." blockContent2="The game was designed and developed by students of Digital Learning Games at Tallinn University with the support of HITSA IT Akadeemia." linkHref="#/about" linkText="Learn more about us."/>
