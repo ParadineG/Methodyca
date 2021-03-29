@@ -5,7 +5,7 @@
             <inertia-link :href="route('game')">Game</inertia-link>
             <inertia-link :href="route('mini-games')">Mini-Games</inertia-link>
             <inertia-link :href="route('publication')">Publication</inertia-link>
-            <inertia-link :href="route('topics')">Database</inertia-link>
+            <inertia-link :href="route('find-topic')">Database</inertia-link>
             <inertia-link :href="route('about')">About Us</inertia-link>
         </nav>
 	</div>

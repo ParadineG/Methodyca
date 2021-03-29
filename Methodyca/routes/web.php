@@ -44,12 +44,15 @@ Route::get('/mini-games', function () {
 Route::get('/publication', function () {
     return Inertia::render('Main/Publication');
 })->name('publication');
-Route::get('/database/topics', function () {
-    return Inertia::render('ResearchTopics/Topics');
-})->name('topics');
+Route::get('/database/find', function () {
+    return Inertia::render('ResearchTopics/FindTopic');
+})->name('find-topic');
 Route::get('/database/add', function () {
     return Inertia::render('ResearchTopics/AddTopic');
 })->name('add-topic');
+Route::get('/database/plan', function () {
+    return Inertia::render('ResearchTopics/CreatePlan');
+})->name('create-plan');
 Route::get('/about', function () {
     return Inertia::render('Main/About');
 })->name('about');

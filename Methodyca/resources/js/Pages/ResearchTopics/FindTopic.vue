@@ -2,7 +2,7 @@
     <app-layout imgPath="../assets/">
         <div class="textblock">
             <h1 class="navi">
-                <inertia-link :href="route('topics')">Topics</inertia-link>
+                <inertia-link :href="route('find-topic')">Find topic</inertia-link>
                 <inertia-link :href="route('add-topic')">Add topic</inertia-link>
             </h1>
             <br>
@@ -129,18 +129,18 @@
 	}
 
 	.honeypot-field {
-    display: none;
+        display: none;
 	}
 
 	textarea {
 		top: -2px;
 		padding: 10px;
 		border-radius: 4px 4px 4px 4px;
-    box-sizing: border-box;
+        box-sizing: border-box;
 		border: 1px solid #ccc;
-    box-shadow: inset 0 4px 3px #ddd;
+        box-shadow: inset 0 4px 3px #ddd;
 		writing-mode: horizontal-tb !important;
-    cursor: text;
+        cursor: text;
 		resize: none;
 		font: inherit;
 		font-size: 0.9em;
@@ -150,11 +150,11 @@
 	.textarea {
 		padding: 3px 8px 3px;
 		border-radius: 4px 4px 4px 4px;
-    box-sizing: border-box;
+        box-sizing: border-box;
 		border: 1px solid rgba(62, 95, 125, 0.6);
-    box-shadow: inset 0 4px 3px rgba(62, 95, 125, 0.2);
+        box-shadow: inset 0 4px 3px rgba(62, 95, 125, 0.2);
 		writing-mode: horizontal-tb !important;
-    cursor: text;
+        cursor: text;
 		resize: none;
 		font: inherit;
 		font-size: 0.9em;

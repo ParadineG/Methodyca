@@ -2,7 +2,7 @@
     <app-layout imgPath="../assets/">
         <div class="textblock">
             <h1 class="navi">
-                <inertia-link :href="route('topics')">Topics</inertia-link>
+                <inertia-link :href="route('find-topic')">Find topic</inertia-link>
                 <inertia-link :href="route('add-topic')">Add topic</inertia-link>
             </h1>
             <br>
