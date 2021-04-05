@@ -1,0 +1,16 @@
+{
+"companyName": "DefaultCompany",
+"productName": "Untitled RM Game",
+"productVersion": "0.1",
+"dataUrl": "RPP_HTML.data.unityweb",
+"wasmCodeUrl": "RPP_HTML.wasm.code.unityweb",
+"wasmFrameworkUrl": "RPP_HTML.wasm.framework.unityweb",
+"graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20",
+"cacheControl": {"default": "must-revalidate"},
+"developmentBuild": false,
+"multithreading": false,
+"unityVersion": "2019.3.15f1"
+}
