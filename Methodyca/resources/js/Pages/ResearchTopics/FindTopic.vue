@@ -1,10 +1,7 @@
 <template>
     <app-layout imgPath="../assets/">
         <div class="textblock">
-            <h1 class="navi">
-                <inertia-link :href="route('find-topic')">Find topic</inertia-link>
-                <inertia-link :href="route('add-topic')">Add topic</inertia-link>
-            </h1>
+            <data-base-menu/>
             <br>
             <p><strong>This page will later on host a database of research topics as well as listing supervisors.</strong></p>
             <p>Meanwhile you can gladly submit an idea for a future research topic that you would like to see in this future database.</p>
@@ -20,49 +17,6 @@
 </template>
 
 <style scoped>
-
-    .navi {
-		padding: 10px;
-	}
-
-	.navi a {
-		font-family: "GoldenDragon";
-		/* font-weight: bold; */
-		text-shadow: 3px 3px 3px rgba(61, 75, 88, 0.8);
-		font-size: 1.8vw;
-		color: #fefefe;
-		/*color: #3d4b58; --> dark blue*/
-		/*color: #a20099; --> deep purple*/
-		/*color: #2c3e50; --> dark grey green colour*/
-		margin: 15px;
-		padding: 6px;
-		text-decoration: none;
-	}
-
-	.navi a.router-link-active {
-		/*font-size: 1.8em;*/
-		/*border: 1px solid #f300cb;*/
-		color: #00edff; /*--> bright blue*/
-		/*color: #f885f7; --> dull purple */
-		/*color: #ff00ff; --> bright purple*/
-		/*color: #42b983; --> green colour*/
-		/*color: #3d4b58; --> dark dark blue*/
-		/*-webkit-animation: glow 1s ease-in-out infinite alternate;
-		-moz-animation: glow 1s ease-in-out infinite alternate;
-		animation: glow 4s ease-in-out infinite alternate;*/
-	}
-
-	@media screen and (max-width: 990px) {
-		.nav {
-			padding-left: 0;
-			padding-right: 0;
-		}
-
-		.nav a {
-			font-size: 2.7vw;
-			margin: 3px;
-		}
-	}
 	.textblock {
 		color: #fefefe;
 		box-shadow: 0 10px 20px 0 rgba(61, 75, 88, 0.3), 0 10px 40px 0 rgba(61, 75, 88, 0.25);
@@ -230,11 +184,13 @@
 <script>
     import AppLayout from '@/Layouts/AppLayout';
 	import TopicBlock from '@/Layouts/TopicBlock'
+    import DataBaseMenu from '../../Layouts/DataBaseMenu.vue';
 
     export default {
         components: {
             AppLayout,
             TopicBlock,
+            DataBaseMenu,
         },
         data() {
             return {
