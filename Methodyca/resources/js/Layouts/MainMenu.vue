@@ -1,7 +1,7 @@
 <template>
 	<div class="menu">
 		<nav id="nav">
-            <template v-if="isGame">
+            <template v-if="isIsolated">
                 <a :href="route('home')">Home</a>
                 <inertia-link :href="route('game')">Game</inertia-link>
                 <inertia-link :href="route('mini-games')">Mini-Games</inertia-link>
@@ -95,8 +95,8 @@
 	export default {
 		name: "main-menu",
         computed: {
-            isGame() {
-               return window.location.pathname.includes("game")
+            isIsolated() {
+               return window.location.pathname !== '' && window.location.pathname !== '/'
             }
         },
 	}

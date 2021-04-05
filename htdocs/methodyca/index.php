@@ -3,12 +3,11 @@
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
-if (strpos($_SERVER['REQUEST_URI'], 'game') !== false) {   
+if ($_SERVER['REQUEST_URI'] !== '/' && $_SERVER['REQUEST_URI'] !== '') {   
     header("Cross-Origin-Embedder-Policy: require-corp");
     header("Cross-Origin-Opener-Policy: same-origin");
 }
 define('LARAVEL_START', microtime(true));
-
 /*
 |--------------------------------------------------------------------------
 | Check If Application Is Under Maintenance
