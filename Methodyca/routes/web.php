@@ -64,10 +64,10 @@ Route::get('/mini-games/questioniser', function () {
 Route::get('/mini-games/binoculars', function () {
     return Inertia::render('MiniGames/Binoculars');
 })->name('mg-binoculars');
-Route::get('/mini-games/interview_simulator', function () {
+Route::get('/mini-games/interview-simulator', function () {
     return Inertia::render('MiniGames/InterviewSim');
 })->name('mg-interview-sim');
-Route::get('/mini-games/participatory_loop', function () {
+Route::get('/mini-games/participatory-loop', function () {
     return Inertia::render('MiniGames/ParticipatoryLoop');
 })->name('mg-participatory-loop');
 Route::get('/mini-games/data-charger', function () {
@@ -76,3 +76,12 @@ Route::get('/mini-games/data-charger', function () {
 Route::get('/mini-games/jammr', function () {
     return Inertia::render('MiniGames/Jammr');
 })->name('mg-jammr');
+Route::get('/mini-games/persona', function () {
+    return Inertia::render('MiniGames/Persona');
+})->name('mg-persona');
+Route::get('/mini-games/proto-escape', function () {
+    return Inertia::render('MiniGames/ProtoEscape');
+})->name('mg-proto-escape');
+Route::get('/mini-games/research-paper-please', function () {
+    return Inertia::render('MiniGames/ResearchPaperPlease');
+})->name('mg-research-paper-please');
