@@ -6,7 +6,10 @@
 			<mini-game-block picture_src="Interview1Thumbnail.png" pic_title="Interview Simulator" pic_desc="Learn how to conduct an interview through this simulator." minigameHref="mg-interview-sim"></mini-game-block>
 			<mini-game-block picture_src="thumbnailPLsquare.png" pic_title="Participatory Loop" pic_desc="Design a promotion campaign for a time-travel machine by involving stakeholders and meet their needs." minigameHref="mg-participatory-loop"></mini-game-block>
 			<mini-game-block picture_src="DataChargerThumbnail.png" pic_title="DataCharger" pic_desc="Decide whether it's qualitative or quantitative and dump it in the right box." minigameHref="mg-data-charger"></mini-game-block>
+            <mini-game-block picture_src="RPPThumbnail.png" pic_title="Research Papers, Please!" pic_desc="Help academic auditor to evaluate students' research proposals." minigameHref="mg-paper-please"></mini-game-block>
 			<mini-game-block picture_src="thumbnailJammr.png" pic_title="Jammr" pic_desc="Collect data from a Game Jam forum and create a text corpus for an article about the event." minigameHref="mg-jammr"></mini-game-block>
+            <mini-game-block picture_src="protoescapeThumbnail.png" pic_title="Proto Escape" pic_desc="Prototype a communication device for aliens and help yourself to escape." minigameHref="mg-proto-escape"></mini-game-block>
+			<mini-game-block picture_src="PersonaThumbnail.png" pic_title="Persona" pic_desc="Create the user persona of a dating app as a UX designer." minigameHref="mg-persona"></mini-game-block>
 		</div>
   </app-layout>
 </template>
