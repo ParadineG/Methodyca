@@ -6,7 +6,7 @@
                 <inertia-link :href="route('game')">Game</inertia-link>
                 <inertia-link :href="route('mini-games')">Mini-Games</inertia-link>
                 <inertia-link :href="route('publication')">Publication</inertia-link>
-                <inertia-link :href="route('find-topic')">Database</inertia-link>
+                <a :href="route('find-topic')">Database</a>
                 <inertia-link :href="route('about')">About Us</inertia-link>
             </template>
             <template v-else>
@@ -14,7 +14,7 @@
                 <a :href="route('game')">Game</a>
                 <a :href="route('mini-games')">Mini-Games</a>
                 <a :href="route('publication')">Publication</a>
-                <a :href="route('find-topic')">Database</a>
+                <inertia-link :href="route('find-topic')">Database</inertia-link>
                 <a :href="route('about')">About Us</a>
             </template>
         </nav>
@@ -96,7 +96,7 @@
 		name: "main-menu",
         computed: {
             isIsolated() {
-               return window.location.pathname !== '' && window.location.pathname !== '/'
+               return window.location.pathname !== '' && window.location.pathname !== '/' && window.location.pathname.includes('database')
             }
         },
 	}

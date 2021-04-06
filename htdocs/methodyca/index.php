@@ -3,7 +3,7 @@
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
-if ($_SERVER['REQUEST_URI'] !== '/' && $_SERVER['REQUEST_URI'] !== '') {   
+if ($_SERVER['REQUEST_URI'] !== '/' && $_SERVER['REQUEST_URI'] !== '' && !strpos($_SERVER['REQUEST_URI'], 'database') ) {   
     header("Cross-Origin-Embedder-Policy: require-corp");
     header("Cross-Origin-Opener-Policy: same-origin");
 }
