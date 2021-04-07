@@ -12,8 +12,21 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
+        <?php
+            if ($_SERVER['REQUEST_URI'] == '/' || $_SERVER['REQUEST_URI'] == ''
+            || strpos($_SERVER['REQUEST_URI'], 'database')
+            || strpos($_SERVER['REQUEST_URI'], 'admin')
+            || strpos($_SERVER['REQUEST_URI'], 'register')
+            || strpos($_SERVER['REQUEST_URI'], 'login')
+            || strpos($_SERVER['REQUEST_URI'], 'forgot-password')
+            || strpos($_SERVER['REQUEST_URI'], 'dashboard')
+            || strpos($_SERVER['REQUEST_URI'], 'edit-topic')) {
+        ?>
         <!-- Scripts -->
+        <script src="https://www.google.com/recaptcha/api.js?render=6LdQDp4aAAAAAKZX0uQ5-EdNWdAbmlbA2tO2WbBd"></script>
+        <?php
+            }
+        ?>
         @routes
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>

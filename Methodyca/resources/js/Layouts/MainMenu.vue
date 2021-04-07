@@ -96,7 +96,7 @@
 		name: "main-menu",
         computed: {
             isIsolated() {
-               return window.location.pathname !== '' && window.location.pathname !== '/' && window.location.pathname.includes('database')
+               return window.location.pathname !== '' && window.location.pathname !== '/' && !window.location.pathname.includes('database')
             }
         },
 	}

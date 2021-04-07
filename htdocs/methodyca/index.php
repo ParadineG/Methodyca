@@ -3,7 +3,14 @@
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
-if ($_SERVER['REQUEST_URI'] !== '/' && $_SERVER['REQUEST_URI'] !== '' && !strpos($_SERVER['REQUEST_URI'], 'database') ) {   
+if ($_SERVER['REQUEST_URI'] !== '/' && $_SERVER['REQUEST_URI'] !== '' 
+    && !strpos($_SERVER['REQUEST_URI'], 'database') 
+    && !strpos($_SERVER['REQUEST_URI'], 'admin') 
+    && !strpos($_SERVER['REQUEST_URI'], 'login') 
+    && !strpos($_SERVER['REQUEST_URI'], 'register') 
+    && !strpos($_SERVER['REQUEST_URI'], 'forget-password') 
+    && !strpos($_SERVER['REQUEST_URI'], 'dashboard')
+    && !strpos($_SERVER['REQUEST_URI'], 'edit-topic')) {   
     header("Cross-Origin-Embedder-Policy: require-corp");
     header("Cross-Origin-Opener-Policy: same-origin");
 }
