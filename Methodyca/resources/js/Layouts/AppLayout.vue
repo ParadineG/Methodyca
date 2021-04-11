@@ -23,40 +23,41 @@
 </template>
 <style>
 /*      - FONTS -        */
+/*
 @font-face {
 	font-family: "VeteranTypewriter";
 	src: local("VeteranTypewriter"),
-		url("/methodyca/fonts/veteran-typewriter.ttf") format("truetype");
+		url("/fonts/veteran-typewriter.ttf") format("truetype");
 }
 
 @font-face {
 	font-family: "TypeWrong";
-	src: local("VeteranTypewriter"),
-		url("/methodyca/fonts/TypeWrong-Smudged-Bold.ttf") format("truetype");
+	src: local("TypeWrong"),
+		url("/fonts/TypeWrong-Smudged-Bold.ttf") format("truetype");
 }
-
+*/
 @font-face {
 	font-family: "GoldenDragon";
 	src: local("GoldenDragon"),
-		url("/methodyca/fonts/golden-dragon-solid.ttf") format("truetype");
+		url("/fonts/golden-dragon-solid.ttf") format("truetype");
 }
-
+/*
 @font-face {
 	font-family: "Subscriber";
 	src: local("Subscriber"),
-		url("/methodyca/fonts/SUBSCRIBER-Regular.otf") format("opentype");
+		url("/fonts/SUBSCRIBER-Regular.otf") format("opentype");
 }
-
+*/
 @font-face {
 	font-family: "DaisyWheel";
 	src: local("DaisyWheel"),
-		url("/methodyca/fonts/daisywhl.otf") format("opentype");
+		url("/fonts/daisywhl.otf") format("opentype");
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Raleway');
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy');
+/*@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy');
 @import url('https://fonts.googleapis.com/css2?family=Sigmar+One');
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@800&display=swap');*/
 
 /*-----------------------*/
 
