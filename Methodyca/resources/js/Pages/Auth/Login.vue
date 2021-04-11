@@ -10,7 +10,11 @@
             {{ status }}
         </div>
 
-        <form @submit.prevent="submit">
+        <form @submit.prevent="captcha(captchaKey, submit, id, form)">
+            <div class="hp">
+                <jet-label for="id" value="id" />
+                <jet-input id="id" type="text" v-model="id"/>
+            </div>
             <div>
                 <jet-label for="email" value="Email" />
                 <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus />
@@ -40,7 +44,11 @@
         </form>
     </jet-authentication-card>
 </template>
-
+<style scoped>
+    .hp {
+        display: none;
+	}
+</style>
 <script>
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
@@ -60,7 +68,7 @@
             JetLabel,
             JetValidationErrors
         },
-
+        inject: ['captchaKey'],
         props: {
             canResetPassword: Boolean,
             status: String
@@ -68,6 +76,7 @@
 
         data() {
             return {
+                id: '',
                 form: this.$inertia.form({
                     email: '',
                     password: '',
@@ -77,14 +86,24 @@
         },
 
         methods: {
-            submit() {
-                this.form
+            captcha: (captchaKey, submit, id, form) => {
+                if (!id) {
+                    grecaptcha.ready(function() {
+                        grecaptcha.execute(captchaKey, {action: 'submit'}).then(function(token) {
+                            // Add your logic to submit to your backend server here.
+                            submit(form);
+                        });
+                    });
+                }
+            },
+            submit(form) {
+                form
                     .transform(data => ({
                         ... data,
-                        remember: this.form.remember ? 'on' : ''
+                        remember: form.remember ? 'on' : ''
                     }))
                     .post(this.route('login'), {
-                        onFinish: () => this.form.reset('password'),
+                        onFinish: () => form.reset('password'),
                     })
             }
         }

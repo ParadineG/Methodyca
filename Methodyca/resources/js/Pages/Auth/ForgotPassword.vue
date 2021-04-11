@@ -14,7 +14,11 @@
 
         <jet-validation-errors class="mb-4" />
 
-        <form @submit.prevent="submit">
+        <form @submit.prevent="submit(captchaKey, submit, id, form)">
+            <div class="hp">
+                <jet-label for="id" value="id" />
+                <jet-input id="id" type="text" v-model="id"/>
+            </div>
             <div>
                 <jet-label for="email" value="Email" />
                 <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus />
@@ -28,7 +32,11 @@
         </form>
     </jet-authentication-card>
 </template>
-
+<style scoped>
+    .hp {
+        display: none;
+	}
+</style>
 <script>
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
@@ -46,7 +54,7 @@
             JetLabel,
             JetValidationErrors
         },
-
+        inject: ['captchaKey'],
         props: {
             status: String
         },
@@ -60,8 +68,18 @@
         },
 
         methods: {
-            submit() {
-                this.form.post(this.route('password.email'))
+            captcha: (captchaKey, submit, id, form) => {
+                if (!id) {
+                    grecaptcha.ready(function() {
+                        grecaptcha.execute(captchaKey, {action: 'submit'}).then(function(token) {
+                            // Add your logic to submit to your backend server here.
+                            submit(form);
+                        });
+                    });
+                }
+            },
+            submit(form) {
+                form.post(this.route('password.email'))
             }
         }
     }

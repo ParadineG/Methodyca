@@ -6,7 +6,11 @@
 
         <jet-validation-errors class="mb-4" />
 
-        <form @submit.prevent="submit">
+        <form @submit.prevent="captcha(captchaKey, submit, id, form)">
+            <div class="hp">
+                <jet-label for="id" value="id" />
+                <jet-input id="id" type="text" v-model="id"/>
+            </div>
             <div>
                 <jet-label for="name" value="Name" />
                 <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="name" />
@@ -51,7 +55,11 @@
         </form>
     </jet-authentication-card>
 </template>
-
+<style scoped>
+    .hp {
+        display: none;
+	}
+</style>
 <script>
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
@@ -71,9 +79,10 @@
             JetLabel,
             JetValidationErrors
         },
-
+        inject: ['captchaKey'],
         data() {
             return {
+                id: '',
                 form: this.$inertia.form({
                     name: '',
                     email: '',
@@ -85,9 +94,19 @@
         },
 
         methods: {
-            submit() {
-                this.form.post(this.route('register'), {
-                    onFinish: () => this.form.reset('password', 'password_confirmation'),
+            captcha: (captchaKey, submit, id, form) => {
+                if (!id){
+                    grecaptcha.ready(function() {
+                        grecaptcha.execute(captchaKey, {action: 'submit'}).then(function(token) {
+                            // Add your logic to submit to your backend server here.
+                            submit(form);
+                        });
+                    });
+                }
+            },
+            submit(form) {
+                form.post(this.route('register'), {
+                    onFinish: () => form.reset('password', 'password_confirmation'),
                 })
             }
         }

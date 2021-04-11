@@ -6,9 +6,11 @@
             <p><strong>This page will later on host a database of research topics as well as listing supervisors.</strong></p>
             <p>Meanwhile you can gladly submit an idea for a future research topic that you would like to see in this future database.</p>
             <br>
-            <form class="gform" method="POST" @submit.prevent="addTopic">
+            <form class="gform" method="POST" @submit.prevent="captcha(captchaKey, addTopic, name, topic)">
 				<div class="form-elements">
 					<div class="grid-container">
+                        <label for="my-name" class="hp">Name</label>
+                        <input id="my-name" class="hp" type="text" name="my-name" v-model="name" />
 						<!--Title-->
 						<label for="title">Title or Topic*</label>
 						<input type="text" class="textarea" id="title" name="title" rows="1" required="" v-model="topic.title" />
@@ -44,11 +46,10 @@
 					<button type="submit" class="button-success">
 						Send
 					</button>
-
-					<fieldset class="pure-group honeypot-field">
-					<label for="honeypot">To help avoid spam, utilize a Honeypot technique with a hidden text field; must be empty to submit the form! Otherwise, we assume the user is a spam bot.</label>
-					<input id="honeypot" type="text" name="honeypot" value="" />
-					</fieldset>
+                    <!--reset/button-->
+					<button type="reset" class="button-success">
+						Reset
+					</button>
 				</div>
 
 				<div class="thankyou_message" style="display: none;">
@@ -60,39 +61,10 @@
     </app-layout>
 </template>
 
-<script>
-    import AppLayout from '@/Layouts/AppLayout';
-	import TopicBlock from '@/Layouts/TopicBlock'
-    import DataBaseMenu from '../../Layouts/DataBaseMenu.vue';
-
-    export default {
-        components: {
-            AppLayout,
-            TopicBlock,
-            DataBaseMenu,
-        },
-        data() {
-            return {
-                topic: {
-                    title: '',
-                    description: null,
-                    keywords: null,
-                    expire: null,
-                    name: '',
-                    email: '',
-                    agreement: true
-                }
-            }
-        },
-        methods: {
-            async addTopic() {
-                const res = await axios.post('../api/topics', this.topic)
-                console.log(res.response);
-            }
-        }
-    }
-</script>
 <style scoped>
+    .hp {
+        display: none;
+	}
 	.textblock {
 		color: #fefefe;
 		box-shadow: 0 10px 20px 0 rgba(61, 75, 88, 0.3), 0 10px 40px 0 rgba(61, 75, 88, 0.25);
@@ -263,3 +235,48 @@
     }
 
 </style>
+
+<script>
+    import AppLayout from '@/Layouts/AppLayout';
+	import TopicBlock from '@/Layouts/TopicBlock'
+    import DataBaseMenu from '../../Layouts/DataBaseMenu.vue';
+
+    export default {
+        components: {
+            AppLayout,
+            TopicBlock,
+            DataBaseMenu,
+        },
+        inject: ['captchaKey'],
+        data() {
+            return {
+                name: '',
+                topic: {
+                    title: '',
+                    description: null,
+                    keywords: null,
+                    expire: null,
+                    name: '',
+                    email: '',
+                    agreement: true
+                }
+            }
+        },
+        methods: {
+            captcha: (captchaKey, addTopic, name, topic) => {
+                if (!name){
+                    grecaptcha.ready(function() {
+                        grecaptcha.execute(captchaKey, {action: 'submit'}).then(function(token) {
+                            // Add your logic to submit to your backend server here.
+                            addTopic(topic);
+                        });
+                    });
+                }
+            },
+            addTopic: async (topic) => {
+                const res = await axios.post('../api/topics', topic)
+                console.log(res);
+            }
+        }
+    }
+</script>
