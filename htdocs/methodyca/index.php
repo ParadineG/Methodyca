@@ -8,9 +8,11 @@ if ($_SERVER['REQUEST_URI'] !== '/' && $_SERVER['REQUEST_URI'] !== ''
     && !strpos($_SERVER['REQUEST_URI'], 'admin') 
     && !strpos($_SERVER['REQUEST_URI'], 'login') 
     && !strpos($_SERVER['REQUEST_URI'], 'register') 
-    && !strpos($_SERVER['REQUEST_URI'], 'forget-password') 
+    && !strpos($_SERVER['REQUEST_URI'], 'forgot-password') 
+    && !strpos($_SERVER['REQUEST_URI'], 'reset-password') 
     && !strpos($_SERVER['REQUEST_URI'], 'dashboard')
-    && !strpos($_SERVER['REQUEST_URI'], 'edit-topic')) {   
+    && !strpos($_SERVER['REQUEST_URI'], 'edit-topic')
+    && !strpos($_SERVER['REQUEST_URI'], 'profile')) {   
     header("Cross-Origin-Embedder-Policy: require-corp");
     header("Cross-Origin-Opener-Policy: same-origin");
 }
