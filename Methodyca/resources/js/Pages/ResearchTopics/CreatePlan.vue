@@ -3,8 +3,8 @@
         <div class="textblock">
             <data-base-menu/>
             <br>
-            <p><strong>This page will later on host a database of research topics as well as listing supervisors.</strong></p>
-            <p>Meanwhile you can gladly submit an idea for a future research topic that you would like to see in this future database.</p>
+            <p><strong>This is a database of research topics and supervisors for game-related studies.</strong></p>
+            <p>Create plan is a section for students putting together their research plan. (Research plan can be downloaded or sent to staff for feedback.)</p>
             <br>
             <form class="gform" method="POST" @submit.prevent="addTopic" v-on:reset="onReset(plan)">
 				<div class="form-elements">
@@ -384,17 +384,16 @@
                 }
                 if (plan.methodology) {
                     const methodo = methodologies.find(element => element.value == plan.methodology).name
-                    //dd.content.push({ text: 'Methodology', style: 'subheader' })
-                    dd.content.push({ text: methodo, style: 'subheader' })
+                    dd.content.push({ text: 'Methodology', style: 'subheader' })
+                    dd.content.push({ text: methodo, style: 'normal' })
                 }
                 if (plan.method) {
                     const meths = []
+                    dd.content.push({ text: 'Methods', style: 'subheader' });
                     for (const iterator of plan.method) {
                         meths.push(methods.find(element => element.value == iterator).name)
                     }
-                    if(!plan.methodology)
-                        dd.content.push({ text: 'Methods', style: 'subheader' });
-                    dd.content.push({ ul: meths, style: 'normal' })
+
                 }
 
                 pdfMake.createPdf(dd).download('ResearchPlan.pdf')

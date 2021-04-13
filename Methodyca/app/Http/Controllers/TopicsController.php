@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Topic;
+use App\Rules\Recaptcha;
 use Illuminate\Http\Request;
+
 
 class TopicsController extends Controller
 {
@@ -33,6 +35,7 @@ class TopicsController extends Controller
             'name' => 'required',
             'email' => 'required',
             'agreement' => 'required',
+            'token' => ['required', new Recaptcha()]
         ]);
         $topic = new Topic();
         $topic->title = $request->title;
@@ -43,6 +46,7 @@ class TopicsController extends Controller
         $topic->email = $request->email;
         $topic->popularity = 0;
         $topic->agreement = $request->agreement;
+        $topic->visibility = false;
         $topic->save();
 
         return response('Successfully created a new topic', 201);
@@ -68,26 +72,20 @@ class TopicsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'topic' => 'required',
-            'description' => 'required',
-            'keywords' => 'nullable',
-            'expire' => 'required|date',
-            'name' => 'required',
-            'email' => 'required',
-        ]);
         $topic = Topic::find($id);
-        $topic->topic = $request->topic;
-        $topic->description = $request->description;
-        $topic->keywords = $request->keywords;
-        $topic->expire = $request->expire;
-        $topic->name = $request->name;
-        $topic->email = $request->email;
-        $topic->popularity = 0;
-        $topic->agreement = true;
-        $topic->save();
+        if ($topic) {
+            if($request->popularity) {
+                $topic->popularity = $request->popularity;
+            }
+            if($request->visibility) {
+                $topic->visibility = $request->visibility;
+            }
+            $topic->save();
 
-        return response('Successfully updated a topic', 200);
+            return response('Successfully updated a topic', 200);
+        } else {
+            return response('No item found', 422);
+        }
     }
 
     /**

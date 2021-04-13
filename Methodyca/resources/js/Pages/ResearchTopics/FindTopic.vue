@@ -3,14 +3,14 @@
         <div class="textblock">
             <data-base-menu/>
             <br>
-            <p><strong>This page will later on host a database of research topics as well as listing supervisors.</strong></p>
-            <p>Meanwhile you can gladly submit an idea for a future research topic that you would like to see in this future database.</p>
+            <p><strong>This is a database of research topics and supervisors for game-related studies.</strong></p>
+            <p>Find Topic is a section for students who are searching for topics for their final thesis. (Here students can select an existing topic for their research plan.)</p>
             <br>
             <input type="search" placeholder="Search by topic or description or keyword" v-model="filter"
             autocomplete="search" class="mb-4 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-black box-border" />
             <div v-for="topic in filteredTopics" :key="topic.id"  class="topics bg-gray-700 overflow-hidden shadow-xl">
                 <!-- <topic-block topic=topic.title /> -->
-                <topic-block :topicTitle="topic.title" :topicDescription="topic.description" :topicKeywords="topic.keywords" :topicPopularity="topic.popularity" :topicCreated_at="topic.created_at" :topicExpire="topic.expire"/>
+                <topic-block :topicTitle="topic.title" :topicDescription="topic.description" :topicKeywords="topic.keywords" :topicPopularity="topic.popularity" :topicCreated_at="topic.created_at" :topicExpire="topic.expire" :topicId="topic.id" v-on:click="addToPlan"/>
             </div>
         </div>
     </app-layout>
@@ -184,7 +184,7 @@
 <script>
     import AppLayout from '@/Layouts/AppLayout';
 	import TopicBlock from '@/Layouts/TopicBlock'
-    import DataBaseMenu from '../../Layouts/DataBaseMenu.vue';
+    import DataBaseMenu from '@/Layouts/DataBaseMenu.vue';
 
     export default {
         components: {
@@ -201,14 +201,27 @@
         computed: {
             filteredTopics() {
                 return this.topics.filter(topic => {
-                const title = topic.title.toString().toLowerCase();
-                const description = topic.description.toLowerCase();
-                const keywords = topic.keywords.toLowerCase();
-                const searchTerm = this.filter.toLowerCase();
+                    console.log(topic)
 
-                return title.includes(searchTerm) ||
-                    description.includes(searchTerm) ||
-                    keywords.includes(searchTerm);
+                    const title = topic.title.toLowerCase();
+                    let description = '';
+                    if(topic.description)
+                        description = topic.description.toLowerCase();
+                    let keywords = '';
+                    if(topic.keywords)
+                       keywords = topic.keywords.toLowerCase();
+                    const searchTerm = this.filter.toLowerCase();
+                    let expired = false;
+                    if(topic.expire) {
+                        const expire = new Date(topic.expire)
+                        const now = new Date()
+                        expired = expire >= now
+                    }
+                    return expired &&
+                        topic.visibility &&
+                        (title.includes(searchTerm) ||
+                        description.includes(searchTerm) ||
+                        keywords.includes(searchTerm));
                 });
             }
         },
@@ -217,14 +230,23 @@
                 axios.get('../api/topics')
                 .then((res)  => {
                     this.topics = res.data;
-                    console.log(this.topics);
                 }).catch((err)  => {
                     console.log(err);
                 });
-            }
+            },
+            addToPlan(event, topic) {
+                if (event.target.tagName === "BUTTON") {
+                    const _topic = this.topics.find(topic => topic.id === parseInt(event.target.getAttribute('data')));
+                    window.localStorage.setItem('plan-title', _topic.title);
+                    window.localStorage.setItem('plan-supervisor', _topic.name);
+                    if( _topic.agreement)
+                        window.localStorage.setItem('plan-supervisor-email', _topic.email);
+                }
+            },
         },
         created() {
             this.getTopics();
-        }
+        },
+
     }
 </script>

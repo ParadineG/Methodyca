@@ -2,24 +2,16 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
     <details class="bg-white shadow overflow-hidden">
         <summary class="px-4 py-5 sm:px-6 text-lg leading-6 font-medium text-gray-900">
-            Applicant Information
+            {{ topicTitle }} ( visibility: <input type="checkbox" v-bind:data="topicId" v-bind:checked="topicVisibility"/> )
         </summary>
         <div class="border-t border-gray-200">
             <dl>
-            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt class="text-sm font-medium text-gray-500">
-                Topic
-                </dt>
-                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                Research on some molecle
-                </dd>
-            </div>
             <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">
                 Description
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias dolores totam quibusdam tempora impedit dolorem distinctio tenetur adipisci minima! Similique explicabo voluptates numquam magnam quis illum perferendis necessitatibus tempora porro?
+                {{ topicDescription }}
                 </dd>
             </div>
             <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -27,7 +19,7 @@
                 Keywords
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                Phy6sicsm, Chemistry
+                {{ topicKeywords }}
                 </dd>
             </div>
             <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -35,7 +27,7 @@
                 Name
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                Joh Papa
+                {{ topicName }}
                 </dd>
             </div>
             <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -43,7 +35,7 @@
                 Email
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                juku(at).ee
+                {{ topicEmail }}
                 </dd>
             </div>
             <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -51,7 +43,7 @@
                 Id
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                2
+                {{ topicId }}
                 </dd>
             </div>
             <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -59,7 +51,7 @@
                 Popularity
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                17
+                {{ topicPopularity }}
                 </dd>
             </div>
             <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -67,7 +59,7 @@
                 Agreement
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                true
+                {{ topicAgreement }}
                 </dd>
             </div>
             <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -75,7 +67,7 @@
                 Created
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                12-03-2021
+                {{ topicCreated_at }}
                 </dd>
             </div>
             <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -83,7 +75,7 @@
                 Expire
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                22-05-2021
+                {{ topicExpire }}
                 </dd>
             </div>
             </dl>
@@ -91,3 +83,9 @@
     </details>
 
 </template>
+<script>
+	export default {
+		name: "edit-topic-block",
+		props: ['topicTitle', 'topicDescription', 'topicKeywords', 'topicPopularity', 'topicCreated_at', 'topicExpire', 'topicVisibility', 'topicId'],
+	}
+</script>

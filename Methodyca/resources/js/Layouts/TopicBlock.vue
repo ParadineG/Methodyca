@@ -51,9 +51,7 @@
                 If interested You can contact supervisor of this topic by email.
                 </dt>
                 <dd class="mt-1 text-base text-white sm:mt-0 sm:col-span-2">
-                <input type="email" placeholder="Your email"
-            autocomplete="search" class="mb-4 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-black box-border" />
-                <button>Send</button>
+                    <button v-bind:data="topicId">Send</button>
                 </dd>
             </div>
             </dl>
@@ -67,7 +65,7 @@
 <script>
 	export default {
 		name: "topic-block",
-		props: ['topicTitle', 'topicDescription', 'topicKeywords', 'topicPopularity', 'topicCreated_at', 'topicExpire']
+		props: ['topicTitle', 'topicDescription', 'topicKeywords', 'topicPopularity', 'topicCreated_at', 'topicExpire', 'topicId'],
 	}
 </script>
 

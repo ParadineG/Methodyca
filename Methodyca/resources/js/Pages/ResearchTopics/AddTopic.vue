@@ -3,8 +3,8 @@
         <div class="textblock">
             <data-base-menu/>
             <br>
-            <p><strong>This page will later on host a database of research topics as well as listing supervisors.</strong></p>
-            <p>Meanwhile you can gladly submit an idea for a future research topic that you would like to see in this future database.</p>
+            <p><strong>This is a database of research topics and supervisors for game-related studies.</strong></p>
+            <p>Add Topic is a section for potential supervisors for submitting topics that can be studied by students during their final thesis.</p>
             <br>
             <form class="gform" method="POST" @submit.prevent="captcha(captchaKey, addTopic, name, topic)">
 				<div class="form-elements">
@@ -13,7 +13,7 @@
                         <input id="my-name" class="hp" type="text" name="my-name" v-model="name" />
 						<!--Title-->
 						<label for="title">Title or Topic*</label>
-						<input type="text" class="textarea" id="title" name="title" rows="1" required="" v-model="topic.title" />
+						<input type="text" class="textarea" id="title" name="title" rows="1" required="" minlength="3" v-model="topic.title" />
 
 						<!--Description-->
 						<label for="description">Description</label>
@@ -30,11 +30,11 @@
 
 						<!--Name & Email-->
 						<label for="name">Your Name*</label>
-						<input type="text" class="textarea" id="name" name="name" rows="1" required="" v-model="topic.name"/>
+						<input type="text" class="textarea" id="name" name="name" rows="1" required="" minlength="3" v-model="topic.name"/>
 						<small> This name will be present only on the student research plan if the topic is selected.</small>
 
 						<label for="email">Your Email*</label>
-						<input type="email" class="textarea" id="email" name="email" rows="1" required="" v-model="topic.email" />
+						<input type="email" class="textarea" id="email" name="email" rows="1" v-model="topic.email" />
 						<small> This email will be present only on the student research plan if the topic is selected.</small>
 
 						<!--Checkbox-->
@@ -43,7 +43,7 @@
 					</div>
 
 					<!--submit/button-->
-					<button type="submit" class="button-success">
+					<button type="submit" v-bind:disabled="isDisabled" class="button-success">
 						Send
 					</button>
                     <!--reset/button-->
@@ -52,9 +52,14 @@
 					</button>
 				</div>
 
-				<div class="thankyou_message" style="display: none;">
-					<p style="font-size: 1.1em; text-align: center;">- <strong><em>Thank you</em> for your input!</strong> - <br> We will make sure to add it to the database.</p>
-				</div>
+				<modal v-if="popup.show" @close="popup.show = false">
+                    <template v-slot:header>
+                        <h3>{{ popup.header }}</h3>
+                    </template>
+                    <template v-slot:body>
+                       {{ popup.body }}
+                    </template>
+                </modal>
 
 			</form>
         </div>
@@ -239,13 +244,15 @@
 <script>
     import AppLayout from '@/Layouts/AppLayout';
 	import TopicBlock from '@/Layouts/TopicBlock'
-    import DataBaseMenu from '../../Layouts/DataBaseMenu.vue';
+    import DataBaseMenu from '@/Layouts/DataBaseMenu.vue';
+    import Modal from '@/Layouts/Modal.vue';
 
     export default {
         components: {
             AppLayout,
             TopicBlock,
             DataBaseMenu,
+            Modal
         },
         inject: ['captchaKey'],
         data() {
@@ -258,24 +265,50 @@
                     expire: null,
                     name: '',
                     email: '',
-                    agreement: true
-                }
+                    agreement: false,
+                    token: '',
+                },
+                popup: {
+                    show: false,
+                    header: ''
+                },
+                isDisabled: false,
             }
         },
         methods: {
-            captcha: (captchaKey, addTopic, name, topic) => {
-                if (!name){
+            captcha(captchaKey, addTopic, name, topic) {
+                this.isDisabled = true;
+                if (!name) {
                     grecaptcha.ready(function() {
                         grecaptcha.execute(captchaKey, {action: 'submit'}).then(function(token) {
                             // Add your logic to submit to your backend server here.
-                            addTopic(topic);
+                            addTopic(topic, token);
                         });
                     });
                 }
             },
-            addTopic: async (topic) => {
-                const res = await axios.post('../api/topics', topic)
-                console.log(res);
+            async addTopic(topic, token) {
+                topic.token = token;
+                console.log(token);
+
+                try {
+                    const res = await axios.post('../api/topics', topic)
+                    console.log(res.status)
+                    if (res.status < 300) {
+                        this.popup.header = '<strong><em>Thank you</em> for your input!</strong>';
+                        this.popup.body = 'We will make sure to add it to the database.';
+                        this.popup.show = true;
+                    } else {
+                        this.popup.header = '<strong><em>Thank you</em> for your input!</strong>';
+                        this.popup.body = 'But something went wrong. Please check input and try again.';
+                        this.popup.show = true;
+                    }
+                } catch(e) {
+                    this.popup.header = '<strong><em>Thank you</em> for your input!</strong>';
+                    this.popup.body = 'But something went wrong. Please check input and try again.';
+                    this.popup.show = true;
+                }
+                this.isDisabled = false;
             }
         }
     }
