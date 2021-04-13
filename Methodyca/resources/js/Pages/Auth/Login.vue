@@ -80,7 +80,8 @@
                 form: this.$inertia.form({
                     email: '',
                     password: '',
-                    remember: false
+                    remember: false,
+                    token2: '',
                 })
             }
         },
@@ -91,7 +92,8 @@
                     grecaptcha.ready(function() {
                         grecaptcha.execute(captchaKey, {action: 'submit'}).then(function(token) {
                             // Add your logic to submit to your backend server here.
-                            submit(form);
+                            form.token2 = token
+                            submit(form)
                         });
                     });
                 }

@@ -14,7 +14,7 @@
 
         <jet-validation-errors class="mb-4" />
 
-        <form @submit.prevent="submit(captchaKey, submit, id, form)">
+        <form @submit.prevent="captcha(captchaKey, submit, id, form)">
             <div class="hp">
                 <jet-label for="id" value="id" />
                 <jet-input id="id" type="text" v-model="id"/>
@@ -61,8 +61,10 @@
 
         data() {
             return {
+                id: '',
                 form: this.$inertia.form({
-                    email: ''
+                    email: '',
+                    token2: '',
                 })
             }
         },
@@ -73,13 +75,14 @@
                     grecaptcha.ready(function() {
                         grecaptcha.execute(captchaKey, {action: 'submit'}).then(function(token) {
                             // Add your logic to submit to your backend server here.
+                            form.token2 = token;
                             submit(form);
                         });
                     });
                 }
             },
             submit(form) {
-                form.post(this.route('password.email'))
+                form.post(this.route('password.email'));
             }
         }
     }
