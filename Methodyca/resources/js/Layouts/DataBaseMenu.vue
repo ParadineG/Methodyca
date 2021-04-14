@@ -1,8 +1,8 @@
 <template>
 	<nav class="navi">
-        <inertia-link :href="route('find-topic')">Find topic</inertia-link>
-        <inertia-link :href="route('add-topic')">Add topic</inertia-link>
-        <inertia-link :href="route('create-plan')">Create plan</inertia-link>
+        <inertia-link :href="route('find-topic')" class="button-link">Find topic</inertia-link>
+        <inertia-link :href="route('add-topic')" class="button-link">Add topic</inertia-link>
+        <inertia-link :href="route('create-plan')" class="button-link">Create plan</inertia-link>
     </nav>
 </template>
 
@@ -49,7 +49,12 @@
 			margin: 3px;
 		}
 	}
-
+    .button-link {
+        transition: 0.7s ease;
+    }
+    .button-link:hover {
+		color: rgba(0,237,255, 0.9);
+	}
 </style>
 
 <script>

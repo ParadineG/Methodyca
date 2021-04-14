@@ -8,7 +8,7 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div v-for="topic in allTopics" :key="topic.id"  class="bg-white overflow-hidden shadow-xl">
-                   <edit-topic-block :topicTitle="topic.title" :topicDescription="topic.description" :topicKeywords="topic.keywords" :topicPopularity="topic.popularity" :topicCreated_at="topic.created_at" :topicExpire="topic.expire" :topicVisibility="topic.visibility" :topicId="topic.id" v-on:change="updateVisibility"/>
+                   <edit-topic-block :topicTitle="topic.title" :topicDescription="topic.description" :topicName="topic.name" :topicEmail="topic.email" :topicKeywords="topic.keywords" :topicPopularity="topic.popularity" :topicAgreement="topic.agreement" :topicCreated_at="topic.created_at" :topicExpire="topic.expire" :topicVisibility="topic.visibility" :topicId="topic.id" v-on:change="updateVisibility"/>
                 </div>
             </div>
         </div>
@@ -31,18 +31,18 @@
             }
         },
         computed: {
-            allTopics() { return this.topics }
+            allTopics() {
+                return this.topics.filter((topic, index, array) => {
+                    array[index].name = decodeURIComponent(atob(topic.name))
+                    array[index].email = decodeURIComponent(atob(topic.email))
+                    console.log(array[index].name)
+                    return true;
+                });
+            }
         },
         methods: {
             getTopics() {
                 axios.get('../api/topics')
-                .then((res)  => {
-                    this.topics = res.data;
-                    console.log(this.topics);
-                }).catch((err)  => {
-                    console.log(err);
-                });
-                axios.get('../api/reg')
                 .then((res)  => {
                     this.topics = res.data;
                     console.log(this.topics);
@@ -54,7 +54,7 @@
                 axios.put(`../api/topics/${id}`, {
                     visibility: check
                 }).then((res)  => {
-                    console.log(this.res);
+                    //console.log(this.res);
                 }).catch((err)  => {
                     console.log(err);
                 });
@@ -63,7 +63,7 @@
                 if (event.target.getAttribute('type') === "checkbox") {
                     const check = event.target.checked;
                     const id = event.target.getAttribute('data')
-                    console.log(check)
+                    //console.log(check)
                     this.updateTopic(id, check)
                 }
             },

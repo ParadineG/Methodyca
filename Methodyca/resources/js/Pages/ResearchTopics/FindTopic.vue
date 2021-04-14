@@ -56,32 +56,6 @@
 		text-decoration: none;
 	}
 
-	.button-success {
-        color: white;
-        border-radius: 4px;
-		border: 1px solid rgba(254,254,254, 0.9);
-        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-        background: rgba(61, 75, 88, 0);
-		font-size: 125%;
-		padding-left: 16px;
-		padding-right: 16px;
-		padding-top: 5px;
-		padding-bottom: 4px;
-        color: #fefefe;
-		font-family: "Raleway";
-        font-weight: 800;
-        font-size: 18px;
-        transition: 0.7s ease;
-        text-decoration: none;
-		margin-top: 10px;
-		cursor: pointer;
-	}
-
-	.button-success:hover {
-		color: rgba(0,237,255, 0.9);
-		border: 1px solid rgba(0,237,255, 0.9);
-	}
-
 	.honeypot-field {
         display: none;
 	}
@@ -200,9 +174,8 @@
         },
         computed: {
             filteredTopics() {
-                return this.topics.filter(topic => {
+                return this.topics.filter((topic, index, array) => {
                     console.log(topic)
-
                     const title = topic.title.toLowerCase();
                     let description = '';
                     if(topic.description)
@@ -212,12 +185,15 @@
                        keywords = topic.keywords.toLowerCase();
                     const searchTerm = this.filter.toLowerCase();
                     let expired = false;
+                    const createdAt = new Date(topic.created_at)
+                    array[index].created_at = createdAt.toDateString()
                     if(topic.expire) {
                         const expire = new Date(topic.expire)
+                        array[index].expire = expire.toDateString()
                         const now = new Date()
                         expired = expire >= now
                     }
-                    return expired &&
+                    return !expired &&
                         topic.visibility &&
                         (title.includes(searchTerm) ||
                         description.includes(searchTerm) ||
@@ -238,9 +214,9 @@
                 if (event.target.tagName === "BUTTON") {
                     const _topic = this.topics.find(topic => topic.id === parseInt(event.target.getAttribute('data')));
                     window.localStorage.setItem('plan-title', _topic.title);
-                    window.localStorage.setItem('plan-supervisor', _topic.name);
+                    window.localStorage.setItem('plan-supervisor',  decodeURIComponent(atob(_topic.name)));
                     if( _topic.agreement)
-                        window.localStorage.setItem('plan-supervisor-email', _topic.email);
+                        window.localStorage.setItem('plan-supervisor-email',  decodeURIComponent(atob(_topic.email)));
                 }
             },
         },

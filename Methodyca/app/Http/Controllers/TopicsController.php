@@ -75,7 +75,10 @@ class TopicsController extends Controller
         $topic = Topic::find($id);
         if ($topic) {
             if($request->popularity) {
-                $topic->popularity = $request->popularity;
+                $this->validate($request, [
+                    'token' => ['required', new Recaptcha()]
+                ]);
+                $topic->popularity++;
             }
             if($request->visibility) {
                 $topic->visibility = $request->visibility;
@@ -83,8 +86,6 @@ class TopicsController extends Controller
             $topic->save();
 
             return response('Successfully updated a topic', 200);
-        } else {
-            return response('No item found', 422);
         }
     }
 

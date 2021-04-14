@@ -2,20 +2,20 @@
 	<div class="menu">
 		<nav id="nav">
             <template v-if="isIsolated">
-                <a :href="route('home')">Home</a>
-                <inertia-link :href="route('game')">Game</inertia-link>
-                <inertia-link :href="route('mini-games')">Mini-Games</inertia-link>
-                <inertia-link :href="route('publication')">Publication</inertia-link>
-                <a :href="route('find-topic')">Database</a>
-                <inertia-link :href="route('about')">About Us</inertia-link>
+                <a :href="route('home')" class="button-link">Home</a>
+                <inertia-link :href="route('game')" class="button-link">Game</inertia-link>
+                <inertia-link :href="route('mini-games')" class="button-link">Mini-Games</inertia-link>
+                <inertia-link :href="route('publication')" class="button-link">Publication</inertia-link>
+                <a :href="route('find-topic')" class="button-link">Database</a>
+                <inertia-link :href="route('about')" class="button-link">About Us</inertia-link>
             </template>
             <template v-else>
-                <inertia-link :href="route('home')">Home</inertia-link>
-                <a :href="route('game')">Game</a>
-                <a :href="route('mini-games')">Mini-Games</a>
-                <a :href="route('publication')">Publication</a>
-                <inertia-link :href="route('find-topic')">Database</inertia-link>
-                <a :href="route('about')">About Us</a>
+                <inertia-link :href="route('home')" class="button-link">Home</inertia-link>
+                <a :href="route('game')" class="button-link">Game</a>
+                <a :href="route('mini-games')" class="button-link">Mini-Games</a>
+                <a :href="route('publication')" class="button-link">Publication</a>
+                <inertia-link :href="route('find-topic')" class="button-link">Database</inertia-link>
+                <a :href="route('about')" class="button-link">About Us</a>
             </template>
         </nav>
 	</div>
@@ -68,6 +68,13 @@
 		-moz-animation: glow 1s ease-in-out infinite alternate;
 		animation: glow 4s ease-in-out infinite alternate;*/
 	}
+    .button-link {
+        transition: 0.7s ease;
+    }
+    .button-link:hover {
+		color: rgba(0,237,255, 0.9) !important;
+		/*border: 1px solid rgba(0,237,255, 0.9);*/
+	}
 
 	@media screen and (max-width: 990px) {
 		#nav {
@@ -89,6 +96,7 @@
 			text-shadow: 0 0 2px #fff, 0 0 4px #ff4da6, 0 0 6px #ff4da6, 0 0 8px #ff4da6, 0 0 10px #ff4da6, 0 0 12px #ff4da6, 0 0 14px #ff4da6;
 		}
 	}
+
 </style>
 
 <script>

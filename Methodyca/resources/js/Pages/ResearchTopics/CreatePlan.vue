@@ -150,7 +150,7 @@
 		cursor: pointer;
 	}
 
-	.button-success:hover {
+	.button-form:hover {
 		color: rgba(0,237,255, 0.9);
 		border: 1px solid rgba(0,237,255, 0.9);
         margin-top: 24px;
@@ -472,7 +472,7 @@
                 plan.token = token
                 try {
                     const res = await axios.post('../plan-email', plan)
-                    console.log(res.status)
+                    //console.log(res.status)
                     if (res.status < 300) {
                         this.popup.header = 'Thank you!';
                         this.popup.body = 'Email was sent to our staff for feedback. We will reply on first possible moment.';

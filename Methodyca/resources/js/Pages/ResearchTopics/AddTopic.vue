@@ -289,22 +289,23 @@
             },
             async addTopic(topic, token) {
                 topic.token = token;
-                console.log(token);
-
+                //console.log(token);
+                topic.name =  btoa(topic.name)
+                topic.email =  btoa(topic.email)
                 try {
                     const res = await axios.post('../api/topics', topic)
-                    console.log(res.status)
+                    //console.log(res.status)
                     if (res.status < 300) {
-                        this.popup.header = '<strong><em>Thank you</em> for your input!</strong>';
+                        this.popup.header = 'Thank you for your input!';
                         this.popup.body = 'We will make sure to add it to the database.';
                         this.popup.show = true;
                     } else {
-                        this.popup.header = '<strong><em>Thank you</em> for your input!</strong>';
+                        this.popup.header = 'Thank you for your input!';
                         this.popup.body = 'But something went wrong. Please check input and try again.';
                         this.popup.show = true;
                     }
                 } catch(e) {
-                    this.popup.header = '<strong><em>Thank you</em> for your input!</strong>';
+                    this.popup.header = 'Thank you for your input!';
                     this.popup.body = 'But something went wrong. Please check input and try again.';
                     this.popup.show = true;
                 }
