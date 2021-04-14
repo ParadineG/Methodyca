@@ -8,14 +8,24 @@ Allow less secure apps
 Setup 2-f authentication
 Generate single use password
 Fill .env
+MAIL_USERNAME=dlg@tlu.ee
+MAIL_PASSWORD=...
+MAIL_FROM_ADDRESS=dlg@tlu.ee
 
 ### reCaptcha
 Setup recaptcha v3 account
 https://g.co/recaptcha/admin/
 Fill .env
+GOOGLE_RECAPTCHA_KEY="..."
+GOOGLE_RECAPTCHA_SECRET="..."
 
 ### database
 Fill .env
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=methodyca
+DB_USERNAME=root
+DB_PASSWORD=
 
 ### Redis and MEMCACHED
 Filling optional in .env
@@ -50,17 +60,18 @@ overwrite .env file
 ### setup server
 composer install --no-dev --no-interaction --no-plugins --no-scripts --no-progress --optimize-autoloader
 composer dump-autoload
+php artisan key:generate
 php artisan migrate --force
 php artisan route:clear
-php artisan config:cache
+php artisan config:clear
 php artisan view:cache
-npm install --production
+npm install
 npm run prod
 php artisan up
 
 ## User creation
 ### Create required users
-Created needed users under /admin
+Created needed users under /methodyca/admin
 
 ### Remove registration
 Under config/fortify.php comment out:
