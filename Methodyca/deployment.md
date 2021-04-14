@@ -1,6 +1,27 @@
 # Deployment
-## install software
 
+## have needed accounts
+
+### gmail
+Under Google Settings:
+Allow less secure apps
+Setup 2-f authentication
+Generate single use password
+Fill .env
+
+### reCaptcha
+Setup recaptcha v3 account
+https://g.co/recaptcha/admin/
+Fill .env
+
+### database
+Fill .env
+
+### Redis and MEMCACHED
+Filling optional in .env
+
+
+## install software
 ### install curl
 
 ### install git
@@ -36,3 +57,13 @@ php artisan view:cache
 npm install --production
 npm run prod
 php artisan up
+
+## User creation
+### Create required users
+Created needed users under /admin
+
+### Remove registration
+Under config/fortify.php comment out:
+Features::registration(),
+
+
