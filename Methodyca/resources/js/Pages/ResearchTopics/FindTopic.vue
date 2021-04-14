@@ -175,7 +175,6 @@
         computed: {
             filteredTopics() {
                 return this.topics.filter((topic, index, array) => {
-                    console.log(topic)
                     const title = topic.title.toLowerCase();
                     let description = '';
                     if(topic.description)

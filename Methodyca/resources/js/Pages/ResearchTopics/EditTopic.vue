@@ -35,7 +35,6 @@
                 return this.topics.filter((topic, index, array) => {
                     array[index].name = decodeURIComponent(atob(topic.name))
                     array[index].email = decodeURIComponent(atob(topic.email))
-                    console.log(array[index].name)
                     return true;
                 });
             }
@@ -45,7 +44,7 @@
                 axios.get('../api/topics')
                 .then((res)  => {
                     this.topics = res.data;
-                    console.log(this.topics);
+                    //console.log(this.topics);
                 }).catch((err)  => {
                     console.log(err);
                 });
