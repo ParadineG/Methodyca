@@ -21,15 +21,15 @@
 
                         <!--Authors email-->
 						<label for="author-email" title="What is your email?">Author's e-mail</label>
-						<input type="email" class="textarea" id="author-email" name="author-email" v-model="plan.authorEmail" @change="saveLocally(plan)" />
+						<input type="email" class="textarea" id="author-email" name="author-email" required="" v-model="plan.authorEmail" @change="saveLocally(plan)" />
 
                         <!--Supervisor-->
 						<label for="supervisor" title="Who is your supervisor (filled in automatically if the topic is selected from the database)?">Supervisor</label>
-						<input type="text" class="textarea" id="supervisor" name="supervisor" required="" v-model="plan.supervisor" @change="saveLocally(plan)" />
+						<input type="text" class="textarea" id="supervisor" name="supervisor" v-model="plan.supervisor" @change="saveLocally(plan)" />
 
                         <!--Supervisors email-->
 						<label for="supervisor-email" title="What is supervisor's email?">Supervisor's e-mail</label>
-						<input type="email" class="textarea" id="supervisor-email" name="supervisor-email" required="" v-model="plan.supervisorEmail" @change="saveLocally(plan)" />
+						<input type="email" class="textarea" id="supervisor-email" name="supervisor-email" v-model="plan.supervisorEmail" @change="saveLocally(plan)" />
 
 						<!--Problem-->
 						<label for="problem" title="What is this general problem or need or idea your research tries to solve?">Problem</label>
@@ -62,22 +62,25 @@
 					</div>
 
 					<!--submit/button-->
-					<button type="button" class="button-form" v-on:click="captcha(captchaKey, createDoc, plan, methodologies, methods)">
+					<button type="button" class="button-form"  v-bind:disabled="isDisabled" v-on:click="captcha(captchaKey)">
 						Save as PDF
 					</button>
-                    <button type="button" class="button-form" v-on:click="captcha(captchaKey, createDoc, plan, methodologies, methods)">
-						Send to Supervisor
+                    <button type="button" class="button-form"  v-bind:disabled="isDisabled" v-on:click="captcha2(captchaKey)">
+						Send to Staff for Feedback
 					</button>
                     <!--submit/button-->
 					<button type="reset" class="button-form">
 						Reset
 					</button>
 				</div>
-
-				<div class="thankyou_message" style="display: none;">
-					<p style="font-size: 1.1em; text-align: center;">- <strong><em>Thank you</em> for your input!</strong> - <br> We will make sure to add it to the database.</p>
-				</div>
-
+				<modal v-if="popup.show" @close="popup.show = false">
+                    <template v-slot:header>
+                        <h3>{{ popup.header }}</h3>
+                    </template>
+                    <template v-slot:body>
+                       {{ popup.body }}
+                    </template>
+                </modal>
 			</form>
         </div>
     </app-layout>
@@ -228,7 +231,7 @@
     import DataBaseMenu from '@/Layouts/DataBaseMenu.vue';
     import pdfMake from 'pdfmake/build/pdfmake';
     import pdfFonts from 'pdfmake/build/vfs_fonts';
-
+    import Modal from '@/Layouts/Modal.vue';
 
 
     export default {
@@ -237,6 +240,7 @@
             TopicBlock,
             DataBaseMenu,
             pdfMake,
+            Modal,
         },
         inject: ['captchaKey'],
         data() {
@@ -254,7 +258,15 @@
                     question: '',
                     methodology: '',
                     method: [],
+                    data: '',
+                    token: ''
                 },
+                popup: {
+                    show: false,
+                    header: '',
+                    body: '',
+                },
+                isDisabled: false,
                 methodologies: [
                     { name: 'Meta Study', value: 'MetaStudy' },
                     { name: 'Experiment', value: 'Experiment' },
@@ -323,17 +335,45 @@
             this.saveLocally(this.plan);
         },
         methods: {
-            captcha: (captchaKey, createDoc, plan, methodologies, methods) => {
-                if (!plan.name){
+            captcha(captchaKey) {
+                this.isDisabled = true;
+                if (!this.plan.name) {
+                    const createDoc = this.createDoc;
+                    const plan = this.plan;
+                    const methodologies = this.methodologies;
+                    const methods = this.methods;
+                    const enableButtons = this.enableButtons;
                     grecaptcha.ready(function() {
                         grecaptcha.execute(captchaKey, {action: 'submit'}).then(function(token) {
                             // Add your logic to submit to your backend server here.
-                            createDoc(plan, methodologies, methods)
+                            const dd = createDoc(plan, methodologies, methods)
+                            pdfMake.createPdf(dd).download('ResearchPlan.pdf')
+                            enableButtons()
                         });
                     });
                 }
             },
-            createDoc: (plan, methodologies, methods) => {
+            captcha2(captchaKey) {
+                this.isDisabled = true;
+                if (!this.plan.name) {
+                    const createDoc = this.createDoc;
+                    const plan = this.plan;
+                    const methodologies = this.methodologies;
+                    const methods = this.methods;
+                    const enableButtons = this.enableButtons;
+                    const sendEmail = this.sendEmail;
+                    grecaptcha.ready(function() {
+                        grecaptcha.execute(captchaKey, {action: 'submit'}).then(function(token) {
+                            // Add your logic to submit to your backend server here.
+                            const dd = createDoc(plan, methodologies, methods)
+                            pdfMake.createPdf(dd).getBase64((data) => {
+                                sendEmail(plan, data, token, enableButtons)
+                            });
+                        });
+                    });
+                }
+            },
+            createDoc(plan, methodologies, methods) {
                 const dd = {
                     content: [
                         { text: plan.title, style: 'header' },
@@ -393,13 +433,11 @@
                     for (const iterator of plan.method) {
                         meths.push(methods.find(element => element.value == iterator).name)
                     }
-
+                    dd.content.push({ ul: meths, style: 'normal' });
                 }
-
-                pdfMake.createPdf(dd).download('ResearchPlan.pdf')
-
+                return dd;
             },
-            saveLocally: (plan) => {
+            saveLocally(plan) {
                 window.localStorage.setItem('plan-title', plan.title)
                 window.localStorage.setItem('plan-author', plan.author)
                 window.localStorage.setItem('plan-author-email', plan.authorEmail)
@@ -412,7 +450,7 @@
                 window.localStorage.setItem('plan-methodology', plan.methodology)
                 window.localStorage.setItem('plan-method', JSON.stringify(plan.method))
             },
-            onReset: (plan) => {
+            onReset(plan) {
                     plan.title = ''
                     plan.author = ''
                     plan.authorEmail = ''
@@ -425,6 +463,31 @@
                     plan.methodology = ''
                     plan.method = []
                     window.localStorage.clear()
+            },
+            enableButtons() {
+                this.isDisabled = false;
+            },
+            async sendEmail(plan, data, token, enableButtons) {
+                plan.data = encodeURIComponent(data);
+                plan.token = token
+                try {
+                    const res = await axios.post('../plan-email', plan)
+                    console.log(res.status)
+                    if (res.status < 300) {
+                        this.popup.header = 'Thank you!';
+                        this.popup.body = 'Email was sent to our staff for feedback. We will reply on first possible moment.';
+                        this.popup.show = true;
+                    } else {
+                        this.popup.header = 'Thank you!';
+                        this.popup.body = 'But something went wrong. Please check input and try again.';
+                        this.popup.show = true;
+                    }
+                } catch(e) {
+                    this.popup.header = 'Thank you!';
+                    this.popup.body = 'But something went wrong. Please check input and try again.';
+                    this.popup.show = true;
+                }
+                enableButtons()
             }
         }
     }

@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\PlanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/admin/dashboard', functio
 Route::middleware(['auth:sanctum', 'verified'])->get('/admin/edit-topic', function () {
     return Inertia::render('ResearchTopics/EditTopic');
 })->name('edit-topic');
+
+//Email
+Route::post('plan-email', 'App\Http\Controllers\PlanController@sendEmail')->name('plan-email');
+Route::get('plan-email', 'App\Http\Controllers\PlanController@sendEmail')->name('plan-email2');
 
 //Public Web
 Route::get('/', function () {
