@@ -33,8 +33,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/admin/edit-topic', functi
 })->name('edit-topic');
 
 //Email
-Route::post('plan-email', 'App\Http\Controllers\PlanController@sendEmail')->name('plan-email');
-Route::get('plan-email', 'App\Http\Controllers\PlanController@sendEmail')->name('plan-email2');
+Route::post('/plan-email', 'App\Http\Controllers\PlanController@sendEmail')->name('plan-email');
+Route::get('/plan-email', function () {
+    return redirect('/');
+});
 
 //Public Web
 Route::get('/', function () {
