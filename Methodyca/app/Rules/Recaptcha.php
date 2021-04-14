@@ -19,7 +19,7 @@ class Recaptcha implements Rule
             'secret'   => env('GOOGLE_RECAPTCHA_SECRET'),
             'response' => $value
         );
-        error_log(env('GOOGLE_RECAPTCHA_SECRET'));
+        //error_log(env('GOOGLE_RECAPTCHA_SECRET'));
         try {
             $verify = curl_init();
             curl_setopt($verify, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");

@@ -190,7 +190,7 @@
                         const expire = new Date(topic.expire)
                         array[index].expire = expire.toDateString()
                         const now = new Date()
-                        expired = expire >= now
+                        expired = expire <= now
                     }
                     return !expired &&
                         topic.visibility &&
