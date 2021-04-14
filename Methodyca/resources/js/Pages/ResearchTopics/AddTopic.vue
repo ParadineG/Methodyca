@@ -6,7 +6,7 @@
             <p><strong>This is a database of research topics and supervisors for game-related studies.</strong></p>
             <p>Add Topic is a section for potential supervisors for submitting topics that can be studied by students during their final thesis.</p>
             <br>
-            <form class="gform" method="POST" @submit.prevent="captcha(captchaKey, addTopic, name, topic)">
+            <form class="gform" method="POST" autocomplete="on" @submit.prevent="captcha(captchaKey, addTopic, name, topic)">
 				<div class="form-elements">
 					<div class="grid-container">
                         <label for="my-name" class="hp">Name</label>
@@ -30,16 +30,16 @@
 
 						<!--Name & Email-->
 						<label for="name">Your Name*</label>
-						<input type="text" class="textarea" id="name" name="name" rows="1" required="" minlength="3" v-model="topic.name"/>
+						<input type="text" class="textarea" id="name" name="name" rows="1" required="" minlength="3" autocomplete="name" v-model="topic.name"/>
 						<small> This name will be present only on the student research plan if the topic is selected.</small>
 
 						<label for="email">Your Email*</label>
-						<input type="email" class="textarea" id="email" name="email" rows="1" v-model="topic.email" />
+						<input type="email" class="textarea" id="email" name="email" rows="1" required="" autocomplete="email" v-model="topic.email" />
 						<small> This email will be present only on the student research plan if the topic is selected.</small>
 
 						<!--Checkbox-->
 						<input type="checkbox" id="checkbox" name="checkbox"  v-model="topic.agreement" />
-						<label for="checkbox" class="checkboxLabel"> I allow to present my contact information in the researhc plans if the topic is selected by a student.</label>
+						<label for="checkbox" class="checkboxLabel"> I allow to present my contact information in the research plans if the topic is selected by a student.</label>
 					</div>
 
 					<!--submit/button-->
@@ -309,6 +309,8 @@
                     this.popup.body = 'But something went wrong. Please check input and try again.';
                     this.popup.show = true;
                 }
+                topic.name =  ''
+                topic.email =  ''
                 this.isDisabled = false;
             }
         }

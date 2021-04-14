@@ -6,7 +6,7 @@
             <p><strong>This is a database of research topics and supervisors for game-related studies.</strong></p>
             <p>Create plan is a section for students putting together their research plan. (Research plan can be downloaded or sent to staff for feedback.)</p>
             <br>
-            <form class="gform" method="POST" @submit.prevent="addTopic" v-on:reset="onReset(plan)">
+            <form class="gform" method="POST" autocomplete="on" @submit.prevent="addTopic" v-on:reset="onReset(plan)">
 				<div class="form-elements">
 					<div class="grid-container">
                         <label for="plan-name" class="hp">Name</label>
@@ -17,19 +17,19 @@
 
                         <!--Author-->
 						<label for="author" title="What is your fullname?">Author</label>
-						<input type="text" class="textarea" id="author" name="author" required="" v-model="plan.author" @change="saveLocally(plan)" />
+						<input type="text" class="textarea" id="author" name="author" required="" autocomplete="name" v-model="plan.author" @change="saveLocally(plan)" />
 
                         <!--Authors email-->
 						<label for="author-email" title="What is your email?">Author's e-mail</label>
-						<input type="email" class="textarea" id="author-email" name="author-email" required="" v-model="plan.authorEmail" @change="saveLocally(plan)" />
+						<input type="email" class="textarea" id="author-email" name="author-email" required="" autocomplete="email" v-model="plan.authorEmail" @change="saveLocally(plan)" />
 
                         <!--Supervisor-->
 						<label for="supervisor" title="Who is your supervisor (filled in automatically if the topic is selected from the database)?">Supervisor</label>
-						<input type="text" class="textarea" id="supervisor" name="supervisor" v-model="plan.supervisor" @change="saveLocally(plan)" />
+						<input type="text" class="textarea" id="supervisor" name="supervisor" autocomplete="name" v-model="plan.supervisor" @change="saveLocally(plan)" />
 
                         <!--Supervisors email-->
 						<label for="supervisor-email" title="What is supervisor's email?">Supervisor's e-mail</label>
-						<input type="email" class="textarea" id="supervisor-email" name="supervisor-email" v-model="plan.supervisorEmail" @change="saveLocally(plan)" />
+						<input type="email" class="textarea" id="supervisor-email" name="supervisor-email" autocomplete="email" v-model="plan.supervisorEmail" @change="saveLocally(plan)" />
 
 						<!--Problem-->
 						<label for="problem" title="What is this general problem or need or idea your research tries to solve?">Problem</label>

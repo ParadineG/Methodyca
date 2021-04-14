@@ -19,10 +19,10 @@ class CreateTopicsTable extends Migration
         Schema::create('topics', function (Blueprint $table) {
             $table->id();
             $table->string('title')->default('');
-            $table->text('description')->default('');
-            $table->string('keywords')->default('');
+            $table->text('description')->nullable()->default('');
+            $table->string('keywords')->nullable()->default(NULL);
             $table->timestamps();
-            $table->date('expire')->default('2200-01-01');
+            $table->date('expire')->nullable()->default('2200-01-01');
             $table->string('name')->default('');
             $table->string('email')->default('');
             $table->unsignedInteger('popularity')->default(0);
