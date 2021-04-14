@@ -1,10 +1,10 @@
 <template>
 <!-- This example requires Tailwind CSS v2.0+ -->
-    <details class="bg-gray-700 shadow overflow-hidden focus:bg-red-700 hover:ring-indigo-500 hover:border-indigo-500">
-        <summary class="px-4 py-4 sm:px-4 text-lg leading-6 font-medium text-white">
+    <details class="bg-gray-700 overflow-hidden">
+        <summary class="px-4 py-4 sm:px-4 text-lg leading-6 font-medium text-white summary">
             {{ topicTitle }}
         </summary>
-        <div class="border-t border-gray-200">
+        <div class="border-gray-200">
             <dl>
             <div class="bg-gray-500 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-base font-medium text-white">
@@ -61,7 +61,6 @@
 
 <style scoped>
     .button-form {
-        color: white;
         border-radius: 4px;
 		border: 1px solid rgba(254,254,254, 0.9);
         text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
@@ -80,10 +79,18 @@
         margin: 0;
 		cursor: pointer;
 	}
-
 	.button-form:hover {
 		color: rgba(0,237,255, 0.9);
 		border: 1px solid rgba(0,237,255, 0.9);
+	}
+    .summary {
+        color: #fefefe;
+		font-family: "Raleway";
+        transition: 0.7s ease;
+		cursor: pointer;
+	}
+    .summary:hover {
+		color: rgba(0,237,255, 0.9);
 	}
 </style>
 

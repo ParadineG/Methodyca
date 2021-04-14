@@ -4,7 +4,7 @@
         <summary class="px-4 py-5 sm:px-6 text-lg leading-6 font-medium text-gray-900">
             {{ topicTitle }} ( visibility: <input type="checkbox" v-bind:data="topicId" v-bind:checked="topicVisibility"/> )
         </summary>
-        <div class="border-t border-gray-200">
+        <div class="border-gray-200">
             <dl>
             <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">
