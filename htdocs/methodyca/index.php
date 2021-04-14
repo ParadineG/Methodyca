@@ -4,6 +4,8 @@ use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
 if ($_SERVER['REQUEST_URI'] !== '/' && $_SERVER['REQUEST_URI'] !== '' 
+    && $_SERVER['REQUEST_URI'] !== '/methodyca' 
+    && $_SERVER['REQUEST_URI'] !== '/methodyca'.'/'
     && !strpos($_SERVER['REQUEST_URI'], 'database') 
     && !strpos($_SERVER['REQUEST_URI'], 'admin') 
     && !strpos($_SERVER['REQUEST_URI'], 'login') 
