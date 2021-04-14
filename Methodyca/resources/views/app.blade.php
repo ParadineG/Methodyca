@@ -25,10 +25,12 @@
             || strpos($_SERVER['REQUEST_URI'], 'profile')) {
         ?>
         <!-- Scripts -->
-        <script src="https://www.google.com/recaptcha/api.js?render=6LdQDp4aAAAAAKZX0uQ5-EdNWdAbmlbA2tO2WbBd"></script>
+        <script src="https://www.google.com/recaptcha/api.js?render=<?php echo env('GOOGLE_RECAPTCHA_KEY');?>"></script>
         <?php
             }
         ?>
+        <?php echo "<script> window.CAPTCHAKEY = '".env('GOOGLE_RECAPTCHA_KEY')."' </script>";?>
+
         @routes
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>

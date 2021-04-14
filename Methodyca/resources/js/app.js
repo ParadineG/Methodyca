@@ -10,7 +10,7 @@ const el = document.getElementById('app');
 const eventBus = mitt();
 const app = createApp({
     provide: {
-        captchaKey: '6LdQDp4aAAAAAKZX0uQ5-EdNWdAbmlbA2tO2WbBd'
+        captchaKey: window.CAPTCHAKEY
     },
     render: () =>
         h(InertiaApp, {
