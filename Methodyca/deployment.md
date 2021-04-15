@@ -3,13 +3,18 @@
 ## have needed accounts
 
 ### gmail
+(note you may use other mailing providers)
+(also make sure used ports here are open)
 Under Google Settings:
 Allow less secure apps
 Setup 2-f authentication
 Generate single use password
 Fill .env
+MAIL_HOST=smtp.googlemail.com
+MAIL_PORT=465
 MAIL_USERNAME=dlg@tlu.ee
-MAIL_PASSWORD=...
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=ssl
 MAIL_FROM_ADDRESS=dlg@tlu.ee
 
 ### reCaptcha
@@ -29,7 +34,6 @@ DB_PASSWORD=
 
 ### Redis and MEMCACHED
 Filling optional in .env
-
 
 ## install software
 ### install curl
@@ -55,6 +59,7 @@ nvm install 14 --latest-npm
 ### copy project
 php artisan down
 download https://github.com/ParadineG/Methodyca and upload to web
+(htdocs must be public folder)
 overwrite .env file
 
 ### setup server
@@ -64,7 +69,7 @@ php artisan key:generate
 php artisan migrate --force
 php artisan route:clear
 php artisan config:clear
-php artisan view:cache
+php artisan view:clear
 npm install
 npm run prod
 php artisan up
