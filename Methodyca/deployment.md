@@ -60,7 +60,9 @@ nvm install 14 --latest-npm
 php artisan down
 download https://github.com/ParadineG/Methodyca and upload to web
 (htdocs must be public folder)
-overwrite .env file
+Find .env.example in Methodyca folder
+Fill it with accounts access data and save as .env file
+On update simply overwrite .env file
 
 ### setup server
 composer install --no-dev --no-interaction --no-plugins --no-scripts --no-progress --optimize-autoloader
