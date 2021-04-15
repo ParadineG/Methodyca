@@ -6,7 +6,10 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
-
+        <link rel="apple-touch-icon" sizes="180x180" href="/methodyca/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/methodyca/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/methodyca/favicon-16x16.png">
+        <link rel="manifest" href="/methodyca/site.webmanifest">
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" crossorigin>
 
