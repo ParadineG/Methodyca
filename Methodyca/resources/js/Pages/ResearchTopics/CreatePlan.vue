@@ -55,7 +55,10 @@
                         </select>
 
                         <!--Data collection, development or analyse methods-->
-						<label for="method" title="What methods and instruments do you use for collecting data or creating the design (choose at least one from the list)?">Methods</label>
+						<label for="method" title="What methods and instruments do you use for collecting data or creating the design (choose at least one from the list)?">
+                            Methods<br>
+                            (For multiple methods hold down CTRL key)
+                        </label>
                         <select name="method" id="method" class="textarea" v-model="plan.method" @change="saveLocally(plan)" multiple>
                             <option v-for="metho in methods" :key="metho.value" v-bind:value="metho.value"> {{metho.name}} </option>
                         </select>
@@ -66,7 +69,7 @@
 						Save as PDF
 					</button>
                     <button type="button" class="button-form"  v-bind:disabled="isDisabled" v-on:click="captcha2(captchaKey)">
-						Send to Staff for Feedback
+						Send for Feedback
 					</button>
                     <!--submit/button-->
 					<button type="reset" class="button-form">
