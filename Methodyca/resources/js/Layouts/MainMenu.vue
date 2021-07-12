@@ -5,7 +5,7 @@
                 <a :href="route('home')" class="button-link">Home</a>
                 <inertia-link :href="route('game')" class="button-link">Game</inertia-link>
                 <inertia-link :href="route('mini-games')" class="button-link">Mini-Games</inertia-link>
-                <inertia-link :href="route('publication')" class="button-link">Publication</inertia-link>
+                <inertia-link :href="route('publication')" class="button-link">Publications</inertia-link>
                 <a :href="route('find-topic')" class="button-link">Database</a>
                 <inertia-link :href="route('about')" class="button-link">About Us</inertia-link>
             </template>
