@@ -55,7 +55,7 @@ exit
 ssh ...  
 nvm install 14 --latest-npm  
   
-## main install and update  
+## For first install  
 ### copy project  
 php artisan down  
 download https://github.com/ParadineG/Methodyca and upload to web  
@@ -75,7 +75,25 @@ php artisan view:clear
 npm install  
 npm run prod  
 php artisan up  
+
+## For updates
+### copy project  
+php artisan down  
+npm install -g npm
+download https://github.com/ParadineG/Methodyca and upload to web  
+(htdocs must be public folder) by replacing old files
+Update .env file only if needed
   
+### setup server  
+composer install --no-dev --no-interaction --no-plugins --no-scripts --no-progress --optimize-autoloader  
+composer dump-autoload  
+php artisan route:clear  
+php artisan config:clear  
+php artisan view:clear  
+npm install  
+npm run prod  
+php artisan up  
+
 ## User creation  
 ### Create required users  
 Created needed users under /methodyca/admin  
@@ -83,5 +101,3 @@ Created needed users under /methodyca/admin
 ### Remove registration  
 Under config/fortify.php comment out:  
 Features::registration(),  
-
-
