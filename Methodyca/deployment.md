@@ -85,7 +85,7 @@ download https://github.com/ParadineG/Methodyca and upload to web
 Update .env file only if needed
   
 ### setup server  
-composer install --no-dev --no-interaction --no-plugins --no-scripts --no-progress --optimize-autoloader  
+composer update --no-dev --no-interaction --no-plugins --no-scripts --no-progress --optimize-autoloader  
 composer dump-autoload  
 php artisan route:clear  
 php artisan config:clear  
